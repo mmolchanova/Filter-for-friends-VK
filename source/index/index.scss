@@ -125,7 +125,6 @@ body {
     display: flex;
     align-items: center;
     background-color: #ffffff;
-    font: 300 12px 'Fira Sans', sans-serif;
     color: #9f9f9f;
     border-radius: 15px;
 }
@@ -135,6 +134,12 @@ body {
     height: 15px;
     background: url("../img/search.png") no-repeat;
     margin: 0 5px 0 10px;
+}
+
+.search__text {
+    border: none;
+    width: 100%;
+    font: 300 12px 'Fira Sans', sans-serif;    
 }
 
 .result__title {

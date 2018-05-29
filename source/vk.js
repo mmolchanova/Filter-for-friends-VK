@@ -43,7 +43,4 @@ export default function () {
             console.error(e);
         }
     })();
-
-
-    //    friends.get 
 }
