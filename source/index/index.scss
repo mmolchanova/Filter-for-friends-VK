@@ -138,8 +138,9 @@ body {
 
 .search__text {
     border: none;
-    width: 100%;
-    font: 300 12px 'Fira Sans', sans-serif;    
+    width: 90%;
+    font: 300 12px 'Fira Sans', sans-serif;
+    outline: none;
 }
 
 .result__title {
@@ -278,4 +279,8 @@ body {
     
 ::-webkit-scrollbar{
     width: 4px;
+}
+
+.hidden {
+    display: none;
 }

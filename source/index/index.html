@@ -25,8 +25,8 @@
                             </div>
                         </div>
                         <div class="result__title">Ваши друзья</div>
-                        <div id="results" class="column__results">
-                            <div id="results" class="result__block">
+                        <div class="column__results">
+                            <div id="result" class="result__block">
                             </div>
                         </div>
                     </div>
@@ -39,13 +39,25 @@
                         </div>
                         <div class="result__title">Друзья в списке</div>
                         <div class="column__results">
-                            <ul class="result__list">
-                                <li class="friend-item">
-                                    <img class="friend-item__photo" src=""/>
-                                    <div class="friend-item__name"></div>
-                                    <div class="friend-item__remove"></div>
-                                </li>
-                            </ul>
+                            <div id="select" class="result__block">                                    
+                                <ul class="result__list" id="friendsSelect">
+                                    <!-- <li class="friend-item">
+                                        <img class="friend-item__photo" src=""/>
+                                        <div class="friend-item__name">Анна Горовая</div>
+                                        <div class="friend-item__remove"></div>
+                                    </li>
+                                    <li class="friend-item">
+                                        <img class="friend-item__photo" src=""/>
+                                        <div class="friend-item__name">Иван Петров</div>
+                                        <div class="friend-item__remove"></div>
+                                    </li>
+                                    <li class="friend-item">
+                                            <img class="friend-item__photo" src=""/>
+                                            <div class="friend-item__name">Петр Ложкин</div>
+                                            <div class="friend-item__remove"></div>
+                                    </li> -->
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,7 +68,7 @@
         </div>
 
         <script id="user-template" type="text/x-handlebars-template">
-            <ul class="friends">
+            <ul class="friends" id="friendsResult">
                 {{#each items}}
                 <li class="friend-item">
                     <img class="friend-item__photo" src="{{photo_100}}"/>

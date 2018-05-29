@@ -1,3 +1,5 @@
+import filter from './filter.js';
+
 export default function () {
     VK.init({
         apiId: 6491719
@@ -11,7 +13,7 @@ export default function () {
                 } else {
                     reject(new Error('Не удалось авторизоваться'));
                 }
-            }, 2)
+            }, 2);
         });
     }
 
@@ -36,9 +38,10 @@ export default function () {
             const template = document.querySelector('#user-template').textContent;
             const render = Handlebars.compile(template);
             const html = render(friends);
-            const results = document.querySelector('#results');
+            const results = document.querySelector('#result');
 
             results.innerHTML = html;
+            filter();
         } catch (e) {
             console.error(e);
         }
