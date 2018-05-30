@@ -1,4 +1,5 @@
 import filter from './filter.js';
+import move from './move.js';
 
 export default function () {
     VK.init({
@@ -42,6 +43,7 @@ export default function () {
 
             results.innerHTML = html;
             filter();
+            move();
         } catch (e) {
             console.error(e);
         }
