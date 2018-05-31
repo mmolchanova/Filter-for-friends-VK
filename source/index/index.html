@@ -14,7 +14,6 @@
             <div class="container">
                 <div class="header">
                     <h1 class="header__title">Выберите друзей</h1>
-                    <div class="header__close"></div>
                 </div>
                 <div class="content">
                     <div class="column column--left">
@@ -27,6 +26,7 @@
                         <div class="result__title">Ваши друзья</div>
                         <div class="column__results">
                             <div id="result" class="result__block">
+                                    <ul class="friends" id="friendsResult"></ul>
                             </div>
                         </div>
                     </div>
@@ -40,20 +40,18 @@
                         <div class="result__title">Друзья в списке</div>
                         <div class="column__results">
                             <div id="select" class="result__block">                                    
-                                <ul class="result__list" id="friendsSelect">
-                                </ul>
+                                <ul class="friends" id="friendsSelect"></ul>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="footer">
-                    <button class="footer__btn">Сохранить</button>
+                    <button class="footer__btn" id="save">Сохранить</button>
                 </div>
             </div> 
         </div>
 
-        <script id="user-template" type="text/x-handlebars-template">
-            <ul class="friends" id="friendsResult">
+        <script id="user-template" type="text/x-handlebars-template">            
                 {{#each items}}
                 <li class="friend-item">
                     <img class="friend-item__photo" src="{{photo_100}}"/>
@@ -61,8 +59,18 @@
                     <div class="friend-item__add"></div>
                 </li>
                 {{/each}}
-            </ul>
         </script>
+
+        <script id="user-select-template" type="text/x-handlebars-template">
+                {{#each items}}
+                <li class="friend-item">
+                    <img class="friend-item__photo" src="{{photo_100}}"/>
+                    <div class="friend-item__name">{{first_name}} {{last_name}}</div>
+                    <div class="friend-item__remove"></div>
+                </li>
+                {{/each}}
+        </script>
+        
         <script type="text/javascript" src="main.js"></script>      
     </body>
 </html>

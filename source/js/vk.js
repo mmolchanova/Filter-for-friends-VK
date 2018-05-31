@@ -1,7 +1,10 @@
 import filter from './filter.js';
 import move from './move.js';
+import storage from './storage.js';
 
-export default function () {
+export default function () { 
+    storage();
+    
     VK.init({
         apiId: 6491719
     });
@@ -34,18 +37,38 @@ export default function () {
 
     (async () => {
         try {
-            await auth();
-            const friends = await callAPI('friends.get', { fields: 'photo_100' });
-            const template = document.querySelector('#user-template').textContent;
-            const render = Handlebars.compile(template);
-            const html = render(friends);
-            const results = document.querySelector('#result');
+            let friendsLeft = {};
+            let friendsRight = {};
 
-            results.innerHTML = html;
+            if (localStorage.dataLeft || localStorage.dataRight) {
+                friendsLeft = JSON.parse(localStorage.dataLeft);
+                friendsRight = JSON.parse(localStorage.dataRight);
+            } else {
+                await auth();
+                friendsLeft = await callAPI('friends.get', { fields: 'photo_100' });              
+            }          
+            
+            const templateLeft = document.querySelector('#user-template').textContent;
+            const templateRight = document.querySelector('#user-select-template').textContent;
+
+            const renderLeft = Handlebars.compile(templateLeft);
+            const renderRight = Handlebars.compile(templateRight);
+
+            const htmlLeft = renderLeft(friendsLeft);
+            const htmlRight = renderRight(friendsRight);
+
+            const results = document.querySelector('#friendsResult');
+            const select = document.querySelector('#friendsSelect');
+
+            results.innerHTML = htmlLeft;
+            select.innerHTML = htmlRight;
+
+            // localStorage.clear();
+
             filter();
             move();
         } catch (e) {
             console.error(e);
         }
-    })();
+    })();   
 }
