@@ -1,16 +1,34 @@
 import filter from './filter.js';
 import move from './move.js';
-import storage from './storage.js';
+import makeList from './makeList.js';
 
-import renderLeft from '../templates/user-template.hbs';
-import renderRight from '../templates/user-select-template.hbs';
-
-export default function () { 
-    storage();
-    
+export default function () {    
     VK.init({
         apiId: 6491719
     });
+
+    let friendsLeft = {};
+    let friendsRight = {};
+    
+    if (localStorage.dataLeft || localStorage.dataRight) {
+        friendsLeft = JSON.parse(localStorage.dataLeft);
+        friendsRight = JSON.parse(localStorage.dataRight);
+        makeList(friendsLeft, friendsRight);
+        filter();
+        move();    
+    } else {
+        (async () => {
+            try {               
+                await auth();
+                friendsLeft = await callAPI('friends.get', { fields: 'photo_100' });              
+                makeList(friendsLeft, friendsRight);
+                filter();
+                move();
+            } catch (e) {
+                console.error(e);
+            }
+        })();  
+    } 
 
     function auth() {
         return new Promise((resolve, reject) => {
@@ -37,35 +55,4 @@ export default function () {
             });
         })
     }
-
-    (async () => {
-        try {
-            let friendsLeft = {};
-            let friendsRight = {};
-
-            if (localStorage.dataLeft || localStorage.dataRight) {
-                friendsLeft = JSON.parse(localStorage.dataLeft);
-                friendsRight = JSON.parse(localStorage.dataRight);
-            } else {
-                await auth();
-                friendsLeft = await callAPI('friends.get', { fields: 'photo_100' });              
-            }          
-
-            const htmlLeft = renderLeft(friendsLeft);
-            const htmlRight = renderRight(friendsRight);
-
-            const results = document.querySelector('#friendsResult');
-            const select = document.querySelector('#friendsSelect');
-
-            results.innerHTML = htmlLeft;
-            select.innerHTML = htmlRight;
-
-            // localStorage.clear();
-
-            filter();
-            move();
-        } catch (e) {
-            console.error(e);
-        }
-    })();   
 }
