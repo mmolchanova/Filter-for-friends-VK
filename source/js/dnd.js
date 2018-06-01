@@ -28,6 +28,8 @@ export default function (startZone, dropZone, className) {
     dropZone.parentNode.parentNode.addEventListener('drop', (e) => {
         if (currentDrag) {
             e.preventDefault();
+            console.log(currentDrag.node);
+            console.log(currentDrag.node.lastElementChild.classList.contains('friend-item__add'));
 
             currentDrag.node.lastElementChild.classList.toggle('friend-item__add');
             currentDrag.node.lastElementChild.classList.toggle('friend-item__remove');

@@ -13,15 +13,19 @@ const PATHS = {
 };
 
 module.exports = {
-    entry: PATHS.source + '/index/index.js',
+    entry: PATHS.source + '/index.js',
     output: {
         path: PATHS.build,
         filename: '[name].js'
     },
+    devServer: {
+        index: 'index.html'
+    },
     plugins: [
         new HtmlWebpackPlugin({
-            template: PATHS.source + '/index/index.html',
-            // chunks: ['index', 'common']
+            template: 'index.hbs',
+            filename: 'index.html',
+            // chunks: ['index']
         }),
         new CleanWebpackPlugin('build'),
         new ExtractTextPlugin('[name].css'),
@@ -69,7 +73,11 @@ module.exports = {
                 options: {
                     name: 'img/[name].[ext]'
                 }
-            } 
+            },
+            {
+                test: /\.hbs/,
+                loader: 'handlebars-loader'
+            }
         ]
     }
 };

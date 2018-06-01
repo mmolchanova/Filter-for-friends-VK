@@ -2,6 +2,9 @@ import filter from './filter.js';
 import move from './move.js';
 import storage from './storage.js';
 
+import renderLeft from '../templates/user-template.hbs';
+import renderRight from '../templates/user-select-template.hbs';
+
 export default function () { 
     storage();
     
@@ -47,12 +50,6 @@ export default function () {
                 await auth();
                 friendsLeft = await callAPI('friends.get', { fields: 'photo_100' });              
             }          
-            
-            const templateLeft = document.querySelector('#user-template').textContent;
-            const templateRight = document.querySelector('#user-select-template').textContent;
-
-            const renderLeft = Handlebars.compile(templateLeft);
-            const renderRight = Handlebars.compile(templateRight);
 
             const htmlLeft = renderLeft(friendsLeft);
             const htmlRight = renderRight(friendsRight);
